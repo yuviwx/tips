@@ -17,3 +17,12 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+@media only screen and (max-width: 480px) {
+  html{
+    font-size: 5px;
+  }
+  td input {
+    width: 5rem;
+  }
+}
