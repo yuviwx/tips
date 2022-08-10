@@ -25,4 +25,8 @@ code {
   td input {
     width: 15px;
   }
+
+  input {
+    font-size: 14px;
+  }
 }
