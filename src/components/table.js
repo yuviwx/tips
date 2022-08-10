@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import { TableRow } from "./tableRow"; 
 
 const worker = {
@@ -28,6 +28,7 @@ export function Table(props) {
         console.log("enter func");
         console.log(target.id)
         setWorkers(() => {
+            // eslint-disable-next-line eqeqeq
             const a = workers.filter(worker => worker.id != target.id)
             return a.map((worker,index) => ({...worker, id: index}))
         });
