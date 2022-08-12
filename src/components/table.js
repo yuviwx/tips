@@ -6,9 +6,9 @@ const worker = {
     name: '',
     entranceTime: '',
     leaveTime: '',
-    totalTime: 0,
-    moneyForAnHour: 0,
-    totalSalary: 0,
+    totalTime: null,
+    moneyForAnHour: null,
+    totalSalary: null,
     supplement: ''
 }
 
@@ -65,17 +65,12 @@ export function Table(props) {
                 <input name="totalTips" type="number" value={totalTips} placeholder={0} onChange={handleChange} required></input>
             </header>
             <table>
-                <thead>
+            <thead>
                 <tr>
-                    <th scope='col'>שם עובד</th>
-                    <th scope='col'>שעת כניסה</th>
-                    <th scope='col'>שעת יציאה</th>
-                    <th scope='col'>סה"כ שעות</th>
-                    <th scope='col'>סה"כ לשעה</th>
-                    <th scope='col'>סה"כ</th>
-                    <th scope='col'>השלמה</th>
+                    <th scope="col">מלצרים</th>
+                    <th scope="col">מחיקה</th>
                 </tr>
-                </thead>
+            </thead>
                 <tbody>
                     {
                         workers ? workers.map((worker, index) => <TableRow workers={workers} worker={worker} key={index} index={index} setWorkers={setWorkers} removeEmploy={removeEmploy} totalTime={totalTime} setTotalTime={setTotalTime}/>) : <TableRow worker='' key={0}/>
