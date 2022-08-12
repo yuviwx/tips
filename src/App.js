@@ -1,4 +1,4 @@
-import tableStyle from './table.css';
+import tableStyle from './styles/table.css';
 import { Table } from './components/table';
 
 function App() {

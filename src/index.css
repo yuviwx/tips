@@ -8,9 +8,9 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  display: flex;
+  /*display: flex;
   justify-content: space-around;
-  flex-wrap: nowrap;
+  flex-wrap: nowrap;*/
 }
 
 code {
@@ -20,10 +20,10 @@ code {
 
 @media only screen and (max-width: 480px) {
   html{
-    font-size: 5px;
+    font-size: 12px;
   }
   td input {
-    width: 15px;
+    width: 50px;
   }
 
   input {

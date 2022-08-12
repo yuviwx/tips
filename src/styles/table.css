@@ -1,0 +1,106 @@
+header {
+  margin: 1rem;
+}
+
+label {
+  padding: 0.5rem;
+}
+
+header input {
+  border-bottom: 1px solid black;
+  margin-left: 1rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+form{
+  width: 80%;
+  margin-left: 10%;
+  margin-right: 10%;
+  font-weight: bold;
+}
+
+label{
+  display: block;
+  text-decoration: underline;
+}
+
+table{
+  width: 100%;
+}
+
+table, th, td{
+  border-collapse: collapse;
+  border: 1px solid black;
+}
+th, td {
+  height: 1rem;
+  width: auto;
+  padding: 0.3rem;
+}
+
+td input {
+  width: 7.5rem;
+}
+
+.timesLine input {
+  display: block;
+  width: 8rem;
+  width: min-content !important;
+}
+
+section.firstLine {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-content: space-around;
+  align-items: center;
+}
+
+section.firstLine > div:nth-child(2) {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+section.firstLine > div:nth-child(2) > input{
+  width: 7rem;
+  text-align: end;
+}
+
+tr > td:nth-child(2) {
+  text-align: center;
+}
+
+input {
+  border: none;
+  font-size: 1.5rem;
+}
+
+.remove{
+  background-image: url("../images/x_icon.png");
+  height: 32px;
+  width: 32px;
+}
+
+footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.button {
+  width: 6rem;
+  height: 1.5rem;
+  border: 1px solid black;
+  font-size: 1rem;
+  margin: 2rem;
+}
+
+#total_time {
+  background-color: cornflowerblue;
+  width: 16rem;
+  font-family: 'Rubik Dirt', cursive;
+  font-size: 2.2rem;
+  padding: 1rem;
+  font-weight: 400;
+}
