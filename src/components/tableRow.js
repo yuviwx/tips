@@ -1,7 +1,8 @@
 const timeToInteger = time => {
     const a = time.slice(0,2);
     const b = time.slice(3,5);
-    const c = (parseFloat(a) + parseFloat(b)/60) 
+    const c = (parseFloat(a) + parseFloat(b)/60);
+    Alert(c)
     return c < 10 ? parseInt(c + 24) : c;
 }
 
