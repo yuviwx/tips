@@ -42,6 +42,7 @@ export function Table(props) {
     const calculateSalaries = (e) => {
         e.preventDefault()
         console.log("calculeting")
+        setWorkers(workers.map(worker => ({...worker, totalSalary: 0, supplement: 0})))
         let totalTime = workers.reduce((previousValue, currentValue) => previousValue + currentValue.totalTime,0)
         console.log(totalTime)
         setTotalTime(parseFloat(totalTime.toFixed(2)))
