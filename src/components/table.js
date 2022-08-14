@@ -48,12 +48,13 @@ export function Table(props) {
         setTotalTime(parseFloat(totalTime.toFixed(2)))
         console.log(totalTime)
         const oneHourSalary = (totalTips / totalTime).toFixed(2);
-        if(totalTips > 0) {
-            setWorkers(workers.map(worker => ({...worker, moneyForAnHour: oneHourSalary, totalSalary: (oneHourSalary * worker.totalTime).toFixed(2), supplement: 0})))
-        }
-        if(oneHourSalary < 50) {
+        if(oneHourSalary >= 50) {
+            console.log("setting salary")
+            setWorkers(workers.map(worker => ({...worker, moneyForAnHour: oneHourSalary, totalSalary: (oneHourSalary * worker.totalTime).toFixed(2)})))
+        }else {
+            console.log("setting suppelment")
             let supplement = 50 - oneHourSalary;
-            setWorkers(workers.map(worker => ({...worker, supplement: (supplement * worker.totalTime).toFixed(2)})))
+            setWorkers(workers.map(worker => ({...worker,totalSalary: (oneHourSalary * worker.totalTime).toFixed(2), supplement: (supplement * worker.totalTime).toFixed(2)})))
         }
     }
 

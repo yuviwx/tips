@@ -42,7 +42,7 @@ export function TableRow(props){
                 <section className="firstLine">
                     <div>
                         <label htmlFor="totalTime">שם:</label>
-                        <input name="name" type="text" pattern="[א-ת ]+" value={props.worker.name} placeholder="שם" onChange={handleChange} autoFocus autocomplete required />
+                        <input name="name" type="text" pattern="[א-ת ]+" value={props.worker.name} placeholder="שם" onChange={handleChange} autoFocus autoComplete="on" required />
                     </div>
                     <div>
                         <input name="totalTime" type="number" value={props.worker.totalTime} placeholder='סה"כ שעות' onChange={handleChange} onBlur={setTotalTime} />
