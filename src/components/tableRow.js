@@ -1,8 +1,19 @@
 const timeToInteger = time => {
-    const a = time.slice(0,2);
-    const b = time.slice(3,5);
-    const c = (parseFloat(a) + parseFloat(b)/60) 
-    return c < 10 ? parseInt(c + 24) : c;
+    const hours = time.slice(0,2);
+    const minutes = time.slice(3,5);
+    const total_time = (parseFloat(hours) + parseFloat(minutes)/60);
+    return total_time;
+}
+
+const roundToQuarter = (num) => {
+    let toFixed = num.slice(-2); // Num is a number with 2 decimal digits
+    toFixed %= 25;
+    if(toFixed <= 12) {
+        console.log(toFixed)
+        return parseFloat(num - toFixed/100)
+    }
+
+    return parseFloat(num) + (25 - toFixed)/100
 }
 
 export function TableRow(props){
@@ -15,18 +26,21 @@ export function TableRow(props){
     }
 
     const calculateShift = ({target}) => {
-        if(target.value) {
-            const arrived = timeToInteger(props.worker.entranceTime)
-            const left = timeToInteger(target.value)
-            const totalTime = parseFloat(Math.abs(left - arrived).toFixed(2))
-            props.setWorkers(props.workers.map(worker => worker.id === props.index ? {...worker, totalTime: totalTime} : worker)) 
+        const arrived = timeToInteger(props.worker.entranceTime);
+        let left = timeToInteger(target.value);
+        if(left < arrived) {
+            left += 24
         }
+        const totalTime = (left - arrived).toFixed(2)
+        console.log("type of total: " + typeof(totalTime))
+        const fixedTime = roundToQuarter(totalTime)
+        props.setWorkers(props.workers.map(worker => worker.id === props.index ? {...worker, totalTime: fixedTime} : worker)) 
     }
 
-    const setTotalTime = (e) => {
+    /*const setTotalTime = (e) => {
         console.log(e.view.document)
         props.setTotalTime(parseFloat((props.totalTime + parseFloat(e.target.value)).toFixed(2)))
-    }
+    }*/
 
 
     return(
@@ -45,7 +59,7 @@ export function TableRow(props){
                         <input name="name" type="text" pattern="[א-ת ]+" value={props.worker.name} placeholder="שם" onChange={handleChange} autoFocus autoComplete="on" required />
                     </div>
                     <div>
-                        <input name="totalTime" type="number" value={props.worker.totalTime} placeholder='סה"כ שעות' onChange={handleChange} onBlur={setTotalTime} />
+                        <input name="totalTime" type="number" value={props.worker.totalTime} placeholder='סה"כ שעות' onChange={handleChange} disabled/>
                         <label htmlFor="totalTime">שעות</label>
                     </div>
                 </section>

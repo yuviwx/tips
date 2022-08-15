@@ -43,6 +43,10 @@ td input {
   width: 7.5rem;
 }
 
+input:disabled {
+  background-color: white;
+}
+
 .timesLine input {
   display: block;
   width: 8rem;
@@ -63,7 +67,7 @@ section.firstLine > div:nth-child(2) {
 }
 
 section.firstLine > div:nth-child(2) > input{
-  width: 7rem;
+  /*width: 7rem;*/
   text-align: end;
 }
 
