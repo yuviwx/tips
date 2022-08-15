@@ -42,6 +42,12 @@ export function TableRow(props){
         props.setTotalTime(parseFloat((props.totalTime + parseFloat(e.target.value)).toFixed(2)))
     }*/
 
+    const handleNextInput = (event) => {
+        const form = event.target.form;
+        const index = [...form].indexOf(event.target);
+        form.elements[index + 2].click();
+        event.preventDefault();
+      };
 
     return(
         <tr>
@@ -55,8 +61,8 @@ export function TableRow(props){
             <td>
                 <section className="firstLine">
                     <div>
-                        <label htmlFor="totalTime">שם:</label>
-                        <input name="name" type="text" pattern="[א-ת ]+" value={props.worker.name} placeholder="שם" onChange={handleChange} autoFocus autoComplete="on" required />
+                        <label htmlFor="name">שם:</label>
+                        <input name="name" type="text" pattern="[א-ת ]+" value={props.worker.name} placeholder="שם" onChange={handleChange} onBlur={handleNextInput} autoFocus autoComplete="on" required />
                     </div>
                     <div>
                         <input name="totalTime" type="number" value={props.worker.totalTime} placeholder='סה"כ שעות' onChange={handleChange} disabled/>
