@@ -47,7 +47,7 @@ export function Table(props) {
         console.log(totalTime)
         setTotalTime(parseFloat(totalTime.toFixed(2)))
         console.log(totalTime)
-        const oneHourSalary = (totalTips / totalTime).toFixed(2);
+        const oneHourSalary = Math.floor(totalTips / totalTime);
         if(oneHourSalary >= 50) {
             console.log("setting salary")
             setWorkers(workers.map(worker => ({...worker, moneyForAnHour: oneHourSalary, totalSalary: (oneHourSalary * worker.totalTime).toFixed(2)})))
@@ -63,8 +63,12 @@ export function Table(props) {
             <header>
                 <label htmlFor="date">תאריך</label>
                 <input name="date" type="text" defaultValue={today}></input>
-                <label htmlFor="totalTips">סה"כ טיפים</label>
-                <input name="totalTips" type="number" value={totalTips} placeholder={0} onChange={handleChange} required></input>
+                <div>
+                  <label htmlFor="totalTips">סה"כ טיפים</label>
+                  <input name="totalTips" type="number" value={totalTips} placeholder={0} onChange={handleChange} required />
+                  <label htmlFor="totalTime">סה"כ שעות</label>
+                  <input name="totalTime" type="number" value={totalTime} placeholder={0} onChange={handleChange} required />
+                </div>
             </header>
             <table>
             <thead>
@@ -85,7 +89,7 @@ export function Table(props) {
             <button className="button" onClick={addEmploy}>הוסף עובד</button>
             <input className="button" type="submit" onSubmit={calculateSalaries} value="חשב שכר" />
             </section>
-            <div id="total_time">{`סה"כ שעות: ${totalTime}`}</div>
+            <div id="total_time">{`סה"כ לשעה: ${workers[0].moneyForAnHour}`}</div>
         </footer>
       </form>
     )
