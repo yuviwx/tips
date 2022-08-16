@@ -50,7 +50,7 @@ export function Table(props) {
         const oneHourSalary = Math.floor(totalTips / totalTime);
         if(oneHourSalary >= 50) {
             console.log("setting salary")
-            setWorkers(workers.map(worker => ({...worker, moneyForAnHour: oneHourSalary, totalSalary: (oneHourSalary * worker.totalTime).toFixed(2)})))
+            setWorkers(workers.map(worker => ({...worker, moneyForAnHour: oneHourSalary, totalSalary: Math.round(oneHourSalary * worker.totalTime)})))
         }else {
             console.log("setting suppelment")
             let supplement = 50 - oneHourSalary;
