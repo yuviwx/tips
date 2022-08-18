@@ -7,7 +7,7 @@ const worker = {
     entranceTime: '',
     leaveTime: '',
     totalTime: null,
-    moneyForAnHour: null,
+    moneyForAnHour: 0,
     totalSalary: null,
     supplement: ''
 }
