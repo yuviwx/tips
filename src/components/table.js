@@ -1,11 +1,12 @@
 import {  useState } from "react";
 import { TableRow } from "./tableRow"; 
+import { exportToExcel } from "../fetchers/exportToExcel"
 
 const worker = {
     id: 0,
     name: '',
-    entranceTime: '',
-    leaveTime: '',
+    entranceTime: '00:00',
+    leaveTime: '00:00',
     totalTime: null,
     moneyForAnHour: 0,
     totalSalary: null,
@@ -89,6 +90,11 @@ export function Table(props) {
             <button className="button" onClick={addEmploy}>הוסף עובד</button>
             <input className="button" type="submit" onSubmit={calculateSalaries} value="חשב שכר" />
             </section>
+            <button className="button" onClick={() => {
+                if(workers[0].totalSalary) {
+                    exportToExcel({workers:workers, totalTips: totalTips, totalTime: totalTime})
+                }
+                    }}>ייצא</button>
             <div id="total_time">{`סה"כ לשעה: ${workers[0].moneyForAnHour}`}</div>
         </footer>
       </form>

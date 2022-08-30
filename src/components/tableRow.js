@@ -19,6 +19,7 @@ const roundToQuarter = (num) => {
 export function TableRow(props){
 
     const handleChange = ({ target }) => {
+        console.log("enter change")
         props.setWorkers(props.workers.map(worker => worker.id === props.index ? {...worker, [target.name]: target.value} : worker)) 
         if(target.name === 'leaveTime') {
 
@@ -77,7 +78,7 @@ export function TableRow(props){
                 </section>
                 <section className="salary">
                 <label htmlFor="totalSalary">שכר</label>
-                <input name="totalSalary" type="number" value={props.worker.totalSalary} placeholder="שכר" onChange={handleChange} />
+                <input name="totalSalary" type="number" value={props.worker.totalSalary} placeholder="שכר" onChange={handleChange} disabled/>
                 <label htmlFor="supplement">השלמה</label>
                 <input name="supplement" type="number" value={props.worker.supplement} placeholder="השלמה" onChange={handleChange} />
                 </section>
