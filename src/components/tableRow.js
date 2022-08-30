@@ -44,9 +44,11 @@ export function TableRow(props){
     }*/
 
     const handleNextInput = (event) => {
-        const form = event.target.form;
-        const index = [...form].indexOf(event.target);
-        form.elements[index + 2].click();
+        if(event.target.value){
+            const form = event.target.form;
+            const index = [...form].indexOf(event.target);
+            form.elements[index + 2].click();
+        }
         event.preventDefault();
       };
 
