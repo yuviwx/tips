@@ -1,4 +1,4 @@
-import {  useState } from "react";
+import { useState } from "react";
 import { TableRow } from "./tableRow"; 
 import { exportToExcel } from "../fetchers/exportToExcel"
 
@@ -18,8 +18,8 @@ const today = date.toLocaleDateString(undefined, { weekday: 'long', year: 'numer
 
 export function Table(props) {
     const [workers, setWorkers] = useState([{...worker}]);
-    const [totalTips, setTips] = useState()
-    const [totalTime, setTotalTime] = useState(0)
+    const [totalTips, setTips] = useState();
+    const [totalTime, setTotalTime] = useState(0);
 
     const addEmploy = (e) => {
         e.preventDefault()

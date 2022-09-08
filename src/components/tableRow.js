@@ -1,3 +1,7 @@
+import { useEffect, useState } from "react";
+import Tesseract from "tesseract.js";
+import { runItAll } from "../fetchers/scanBon";
+
 const timeToInteger = time => {
     const hours = time.slice(0,2);
     const minutes = time.slice(3,5);
@@ -17,6 +21,21 @@ const roundToQuarter = (num) => {
 }
 
 export function TableRow(props){
+    const [selectedImage, setSelectedImage] = useState(null);
+
+    const handleChangeImage = ({target}) => {
+        setSelectedImage(target.files[0])
+    }
+
+    useEffect(() => {
+        console.log("entered the effect")
+        let flag = false
+        if(selectedImage){
+            runItAll(selectedImage)
+        }
+    },[selectedImage])
+
+
 
     const handleChange = ({ target }) => {
         console.log("enter change")
@@ -84,6 +103,8 @@ export function TableRow(props){
                 <label htmlFor="supplement">השלמה</label>
                 <input name="supplement" type="number" value={props.worker.supplement} placeholder="השלמה" onChange={handleChange} />
                 </section>
+                <label htmlFor="upload">סרוק תמונה</label>
+                <input type="file" id="upload" accept="image/*" onChange={handleChangeImage}/> 
             </td>
             <td>
                 <input name="remove" className="remove" id={props.worker.id} type='button' onClick={props.removeEmploy} />
