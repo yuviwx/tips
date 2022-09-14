@@ -9,14 +9,7 @@ const timeToInteger = time => {
 }
 
 const roundToQuarter = (num) => {
-    let toFixed = num.slice(-2); // Num is a number with 2 decimal digits
-    toFixed %= 25;
-    if(toFixed <= 12) {
-        console.log(toFixed)
-        return parseFloat(num - toFixed/100)
-    }
-
-    return parseFloat(num) + (25 - toFixed)/100
+    return parseFloat((Math.round(num*4)/4).toFixed(2));
 }
 
 export function TableRow(props){
@@ -61,7 +54,7 @@ export function TableRow(props){
         if(left < arrived) {
             left += 24
         }
-        const totalTime = (left - arrived).toFixed(2)
+        const totalTime = parseFloat((left - arrived).toFixed(2));
         console.log("type of total: " + typeof(totalTime))
         const fixedTime = roundToQuarter(totalTime)
         props.setWorkers(props.workers.map(worker => worker.id === props.index ? {...worker, totalTime: fixedTime} : worker)) 
