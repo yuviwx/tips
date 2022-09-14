@@ -1,6 +1,6 @@
 import { createWorker } from "tesseract.js";
 
-const meltserWorkers = ['יובל','בר','אפיק','מישל','מאיה','ימית','פוקסי','טל שמ','טל שש','דניאל','ניצן','סתיו','אריאל','גל','ליאור','מתן','נאור','נועה','קיילה'];
+const meltserWorkers = ['יובל','בר','אפיק','מישל','מאיה','ימית','פוקסי','טל שמואלי','טל ששון','דניאל','ניצן','סתיו','אריאל','גל','ליאור','מתן','נאור','נועה','קיילה'];
 const WorkersFullNames = {
     יובל: 'יובל נחמן',
     בר: 'בר כהן',
@@ -23,13 +23,13 @@ const WorkersFullNames = {
     קיילה: 'קיילה'
 }
 
-export const convertImageToText = async image => {
+export const convertImageToText = async (image, lang='heb') => {
     const worker = createWorker({
         logger: m => console.log(m),
       });
     await worker.load();
-    await worker.loadLanguage("heb");
-    await worker.initialize("heb");
+    await worker.loadLanguage(lang);
+    await worker.initialize(lang);
     const { data } = await worker.recognize(image);
     //alert(data.text)
     console.log(data)
@@ -93,19 +93,11 @@ const secondTry = async (image) => {
         return("404 no name found, please tell yuval")
 
     }
-
-}
-function compareToList (name) {
-    for(let i = 0; i < meltserWorkers.length; i++){
-        if(name.indexOf(meltserWorkers[i]) !== -1){
-            return WorkersFullNames[meltserWorkers[i]]
-        }
-    }
-    return null
 }
 
 export const runItAll = async image => {
-    const name = await cropImage(image)
+    let flagSecondTry = false;
+    let name = await cropImage(image)
     .then((resolve) => convertImageToText(resolve))
     .then(resolve => {
         for(let i = 0; i < meltserWorkers.length; i++){
@@ -113,11 +105,27 @@ export const runItAll = async image => {
                 return WorkersFullNames[meltserWorkers[i]]
             }
         }
+        flagSecondTry = true;
         return secondTry(image)
     })
     .catch(e => alert(e))
+    let times = await convertImageToText(image, "eng")
+    .then(resolve => {
+        const reg = /\d\d:\d\d/i;
+        let timeARR = resolve.words.filter(word => word.text.match(reg));
+        timeARR = timeARR.map(time => time.text.slice(0,5));
+        return timeARR
+    })
     alert("the final name is: " + name)
-    
+    console.log(times)
+    if(flagSecondTry) {
+        for(let i = 0; i < meltserWorkers.length; i++){
+            if(name.indexOf(meltserWorkers[i]) !== -1){
+                name = WorkersFullNames[meltserWorkers[i]]
+            }
+        }
+    }
+    return {name:name, entranceTime:times[0], leaveTime:times[1]}
 } 
 
 /*

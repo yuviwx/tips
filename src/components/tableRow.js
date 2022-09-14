@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import Tesseract from "tesseract.js";
 import { runItAll } from "../fetchers/scanBon";
 
 const timeToInteger = time => {
@@ -21,18 +20,29 @@ const roundToQuarter = (num) => {
 }
 
 export function TableRow(props){
+    const {workers, setWorkers, index} = props;
     const [selectedImage, setSelectedImage] = useState(null);
 
     const handleChangeImage = ({target}) => {
         setSelectedImage(target.files[0])
     }
-
+    
     useEffect(() => {
+        console.log(index)
         console.log("entered the effect")
-        let flag = false
         if(selectedImage){
-            runItAll(selectedImage)
+            if(localStorage.getItem('selectedImage') !== selectedImage)
+                window.localStorage.setItem("selectedImage", selectedImage)
+                console.log("inside effect")
+                const getName = async () => {
+                    const {name, entranceTime, leaveTime} = await runItAll(selectedImage);
+                    console.log(name)
+                    console.log(typeof(name))
+                    setWorkers(workers.map(worker => worker.id === index ? {...worker, name: name, entranceTime: entranceTime, leaveTime: leaveTime} : worker))
+                }
+            getName()
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     },[selectedImage])
 
 
@@ -103,8 +113,8 @@ export function TableRow(props){
                 <label htmlFor="supplement">השלמה</label>
                 <input name="supplement" type="number" value={props.worker.supplement} placeholder="השלמה" onChange={handleChange} />
                 </section>
-                <label htmlFor="upload">סרוק תמונה</label>
-                <input type="file" id="upload" accept="image/*" onChange={handleChangeImage}/> 
+                <label htmlFor={index}>סרוק תמונה</label>
+                <input type="file" id={index} className="upload" accept="image/*" onChange={handleChangeImage}/> 
             </td>
             <td>
                 <input name="remove" className="remove" id={props.worker.id} type='button' onClick={props.removeEmploy} />
