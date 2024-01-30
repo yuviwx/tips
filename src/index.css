@@ -30,3 +30,11 @@ code {
     font-size: 14px;
   }
 }
+@media only screen and (min-width: 500px) {
+  #root>div>form>table>tbody>tr>td:first-child>label{
+    float: left;
+  }
+  .upload{
+    left: 0;
+  }
+}
