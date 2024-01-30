@@ -35,7 +35,6 @@ code {
     float: left;
   }
   .upload{
-    left: 0;
-    color: aqua;
+    left: 0 !important;
   }
 }
